@@ -1,0 +1,71 @@
+<section class="container main">
+  <div class="py-5">
+    <div class="row gy-4">
+      <div class="col-md-6">
+        <div class="shadow bg-body-tertiary  p-4 tabel-design">
+          <div class="pb-2">
+            <input [(ngModel)]="customerName" class="form-control" type="text"  id="customers" placeholder="search by name">
+          </div>
+          <table class="shadow rounded-2 text-center ">
+            <thead>
+              <tr>
+                <th>Num</th>
+                <th>Name</th>
+                <th>Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Customer of customers | nameSearch:customerName ; let i = index">
+                <td>{{Customer.id}}</td>
+                <td>{{Customer.name}}</td>
+                <td>{{Customer.totalAmount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class=" shadow p-4 mt-4 tabel-design bg-body-tertiary">
+      <div class="d-flex justify-content-between  align-items-center">
+        <div>
+          <p class="text-muted m-0"><span class="text-info">Note :</span>click on customer to see graph</p>
+        </div>
+        <div class="d-flex gap-2 py-3  justify-content-end">
+          <div>
+            <input [(ngModel)]="transactionName" class="form-control" id="name2" type="text" placeholder="search by name...">
+          </div>
+          <div>
+            <input [(ngModel)]="transactionAmount" class="form-control" id="amount2" type="text" placeholder="search by amount...">
+          </div>
+        </div>
+      </div>
+      <table class=" shadow rounded-2">
+        <thead>
+          <tr >
+            <th>Num</th>
+            <th>Customer ID</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="getTransactionData(i)" *ngFor="let transaction of transactions |nameSearch:transactionName | amountSearch:transactionAmount; let i = index">
+            <td>{{transaction.id}}</td>
+            <td>{{transaction.customer_id}}</td>
+            <td>{{transaction.name}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.date}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  
+</section>
